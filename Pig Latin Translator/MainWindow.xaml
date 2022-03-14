@@ -1,0 +1,67 @@
+﻿<Window x:Class="MyWordPad.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyWordPad"
+        mc:Ignorable="d"
+        Title="Pig Latin Translator" Height="500" Width="600">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open"
+                        Executed="OpenCmdExecuted"
+                        CanExecute="OpenCmdCanExecute"/>
+        <CommandBinding Command="ApplicationCommands.Save"
+                        Executed="SaveCmdExecuted"
+                        CanExecute="SaveCmdCanExecute"/>
+    </Window.CommandBindings>
+
+    <DockPanel >
+        <!-- Dock menu system on the top -->
+        <Menu DockPanel.Dock ="Top" HorizontalAlignment="Left" Background="White" >
+            <MenuItem Header="_File" MouseEnter ="MouseEnterFileArea" MouseLeave ="MouseLeaveArea">
+                <MenuItem Command ="ApplicationCommands.Open"/>
+                <MenuItem Command ="ApplicationCommands.Save"/>
+                <Separator/>
+                <MenuItem Header ="_Exit"
+                              MouseEnter ="MouseEnterExitArea"
+                              MouseLeave ="MouseLeaveArea" Click ="FileExit_Click"/>
+
+            </MenuItem>
+
+            <!-- New menu item with commands! -->
+            <MenuItem Header="_Edit" MouseEnter ="MouseEnterEditArea" MouseLeave ="MouseLeaveArea">
+                <MenuItem Command ="ApplicationCommands.Copy"/>
+                <MenuItem Command ="ApplicationCommands.Cut"/>
+                <MenuItem Command ="ApplicationCommands.Paste"/>
+            </MenuItem>
+            <MenuItem Header="_Help" MouseEnter ="MouseEnterHelpArea">
+                <MenuItem Header ="_Developer" Click="MouseClickDeveloperArea"  
+               MouseEnter ="MouseEnterDeveloperArea"/>
+            </MenuItem>
+
+        </Menu>
+
+        <ToolBar DockPanel.Dock ="Top" Background="White" >
+            <Separator/>
+            <Button Content ="Translate" MouseEnter ="MouseEnterTranslateArea" MouseLeave ="MouseLeaveArea" Click ="MouseClickTranslateArea"/>
+            
+        </ToolBar>
+
+        <!-- Put a StatusBar at the bottom -->
+        <StatusBar DockPanel.Dock ="Bottom" Background="White" >
+            <StatusBarItem>
+                <TextBlock Name="statBarText" Text="Ready"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid DockPanel.Dock ="Left"  >
+            <Grid.RowDefinitions> 
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBox Name ="txtSource" Grid.Row = "0" PreviewKeyDown="EnterClicked" TextWrapping="Wrap"  AcceptsReturn ="true" FontSize ="15"/>
+            <TextBox Name ="txtResult"  Grid.Row="1"  TextWrapping="Wrap" FontSize ="15"/>
+        </Grid>
+
+    </DockPanel>
+</Window>
